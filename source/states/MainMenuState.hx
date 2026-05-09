@@ -345,7 +345,7 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 			#if desktop
-			if (controls.justPressed('debug_1'))
+			if (controls.justPressed('debug_1') && ClientPrefs.data.devMode)
 			{
 				selectedSomethin = true;
 				FlxG.mouse.visible = false;

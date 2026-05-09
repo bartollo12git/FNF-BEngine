@@ -1720,9 +1720,9 @@ class PlayState extends MusicBeatState
 
 		if(!endingSong && !inCutscene && allowDebugKeys)
 		{
-			if (controls.justPressed('debug_1'))
+			if (controls.justPressed('debug_1') && ClientPrefs.data.devMode)
 				openChartEditor();
-			else if (controls.justPressed('debug_2'))
+			else if (controls.justPressed('debug_2') && ClientPrefs.data.devMode)
 				openCharacterEditor();
 		}
 
@@ -2102,6 +2102,10 @@ class PlayState extends MusicBeatState
         				}
     				});
 				});
+
+			case 'Change Stage':
+				var newStage:String;
+				newStage = value1;
 
 			case 'Hey!':
 				var value:Int = 2;
