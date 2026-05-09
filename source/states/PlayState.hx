@@ -18,6 +18,7 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.events.KeyboardEvent;
 import haxe.Json;
+import lime.app.Application;
 
 import cutscenes.DialogueBoxPsych;
 
@@ -81,7 +82,9 @@ class PlayState extends MusicBeatState
 		['Shit', 0.4], //From 20% to 39%
 		['Bad', 0.5], //From 40% to 49%
 		['Bruh', 0.6], //From 50% to 59%
-		['Meh', 0.69], //From 60% to 68%
+		['Meh', 0.67], //From 60% to 68%
+		['Goddamnit', 0.68], //67%
+		['Mid', 0.69], //67%
 		['Nice', 0.7], //69%
 		['Good', 0.8], //From 70% to 79%
 		['Great', 0.9], //From 80% to 89%
@@ -195,6 +198,7 @@ class PlayState extends MusicBeatState
 
 	public var guitarHeroSustains:Bool = false;
 	public var instakillOnMiss:Bool = false;
+	public var crashOnMiss:Bool = false;
 	public var cpuControlled:Bool = false;
 	public var practiceMode:Bool = false;
 	public var pressMissDamage:Float = 0.05;
@@ -301,6 +305,7 @@ class PlayState extends MusicBeatState
 		healthGain = ClientPrefs.getGameplaySetting('healthgain');
 		healthLoss = ClientPrefs.getGameplaySetting('healthloss');
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill');
+		crashOnMiss = ClientPrefs.getGameplaySetting('crashmiss');
 		practiceMode = ClientPrefs.getGameplaySetting('practice');
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay');
 		guitarHeroSustains = ClientPrefs.data.guitarHeroSustains;
@@ -1153,7 +1158,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var tempScore:String;
-		if(!instakillOnMiss) tempScore = Language.getPhrase('score_text', 'Score: {1} | Misses: {2} | Rating: {3}', [songScore, songMisses, str]);
+		if(!instakillOnMiss || !crashOnMiss) tempScore = Language.getPhrase('score_text', 'Score: {1} | Misses: {2} | Rating: {3}', [songScore, songMisses, str]);
 		else tempScore = Language.getPhrase('score_text_instakill', 'Score: {1} | Rating: {2}', [songScore, str]);
 		scoreTxt.text = tempScore;
 	}
@@ -2065,6 +2070,31 @@ class PlayState extends MusicBeatState
 		if(Math.isNaN(flValue2)) flValue2 = null;
 
 		switch(eventName) {
+			case 'Lyrics Event':
+				if (flValue2 == null) flValue2 = 5;
+				var lyrics:String;
+				var duration:Float;
+				var text:FlxText;
+
+				lyrics = value1;
+				duration = Std.parseFloat(value2);
+
+				text = new FlxText(0,500, FlxG.width, lyrics, 32);
+				text.setFormat(Paths.font("vcr.ttf"), 48, 0xFFFFFFFF, CENTER, OUTLINE, 0xFF000000);
+				text.scrollFactor.set();
+				text.borderSize = 2;
+				add(text);
+
+				new FlxTimer().start(duration, function(tmr:FlxTimer)
+				{
+    				FlxTween.tween(text, {alpha: 0}, 0.5, {
+        			ease: FlxEase.quadOut,
+        			onComplete: function(twn:FlxTween) {
+            		text.visible = false;
+        				}
+    				});
+				});
+
 			case 'Hey!':
 				var value:Int = 2;
 				switch(value1.toLowerCase().trim()) {
@@ -2870,6 +2900,7 @@ class PlayState extends MusicBeatState
 
 	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
 		//Dupe note remove
+		if (crashOnMiss) Application.current.window.close();
 		notes.forEachAlive(function(note:Note) {
 			if (daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1)
 				invalidateNote(note);

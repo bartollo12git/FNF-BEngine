@@ -26,6 +26,8 @@ typedef TitleData =
 	var starty:Float;
 	var gfx:Float;
 	var gfy:Float;
+	var logox:Float;
+	var logoy:Float;
 	var backgroundSprite:String;
 	var bpm:Float;
 	
@@ -112,6 +114,7 @@ class TitleState extends MusicBeatState
 	}
 
 	var logoBl:FlxSprite;
+	var logo:FlxSprite;
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
@@ -134,6 +137,11 @@ class TitleState extends MusicBeatState
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
+
+		logo = new FlxSprite(bLogoPosition.x, bLogoPosition.y).loadGraphic(Paths.image('Logo'));
+		logo.antialiasing = ClientPrefs.data.antialiasing;
+		logo.scrollFactor.set(0, 0);
+		logo.scale.set(0.25, 0.25);
 
 		gfDance = new FlxSprite(gfPosition.x, gfPosition.y);
 		gfDance.antialiasing = ClientPrefs.data.antialiasing;
@@ -199,6 +207,7 @@ class TitleState extends MusicBeatState
 
 		add(gfDance);
 		add(logoBl); //FNF Logo
+		add(logo); // BENGINE LOGO
 		add(titleText); //"Press Enter to Begin" text
 		add(credGroup);
 		add(ngSpr);
@@ -217,6 +226,7 @@ class TitleState extends MusicBeatState
 
 	var gfPosition:FlxPoint = FlxPoint.get(512, 40);
 	var logoPosition:FlxPoint = FlxPoint.get(-150, -100);
+	var bLogoPosition:FlxPoint = FlxPoint.get(-80, 480);
 	var enterPosition:FlxPoint = FlxPoint.get(100, 576);
 	
 	var useIdle:Bool = false;
