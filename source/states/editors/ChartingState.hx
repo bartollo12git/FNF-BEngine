@@ -86,7 +86,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
 		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"],
 		['Lyrics Event', "Value 1: Lyrics\nValue 2: Duration (If null then the lyrics will last infinitely)"],
-		['Change Stage', "Value 1: Stage\nValue 2: Nothin"]
 	];
 	
 	public static var keysArray:Array<FlxKey> = [ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT]; //Used for Vortex Editor

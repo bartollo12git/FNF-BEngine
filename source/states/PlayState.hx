@@ -2103,10 +2103,6 @@ class PlayState extends MusicBeatState
     				});
 				});
 
-			case 'Change Stage':
-				var newStage:String;
-				newStage = value1;
-
 			case 'Hey!':
 				var value:Int = 2;
 				switch(value1.toLowerCase().trim()) {
