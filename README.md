@@ -36,6 +36,7 @@ A Pretty Simple Fork of Psych Engine 1.0.4
 ## Other Features
 
 * Cool Bee as the logo
+* Kade Engine lookin Song Watermarks
 * "Test" is a song you can play through freeplay!
 
 ***

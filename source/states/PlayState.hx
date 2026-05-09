@@ -561,7 +561,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		uiGroup.add(scoreTxt);
 
-		songWatermark = new FlxText(10, FlxG.height - 30, 0, PlayState.SONG.song, 20);
+		songWatermark = new FlxText(10, FlxG.height - 30, 0, PlayState.SONG.artist + ': ' + PlayState.SONG.song, 20);
 		songWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songWatermark.scrollFactor.set();
 		songWatermark.cameras = [camHUD];

@@ -1,6 +1,7 @@
 {
 	"song": {
 		"player1": "bf-holding-gf",
+		"artist": "Kawai Sprite",
 		"events": [],
 		"gfVersion": "pico-speaker",
 		"notes": [

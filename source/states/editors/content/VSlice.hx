@@ -248,6 +248,7 @@ class VSlice
 
 			var swagSong:SwagSong = {
 				song: metadata.songName,
+				artist: 'Unknown',
 				notes: sectionData,
 				events: [],
 				bpm: songBpm,
