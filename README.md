@@ -37,14 +37,16 @@ A Pretty Simple Fork of Psych Engine 1.0.4
 
 * Cool Bee as the logo
 * Kade Engine lookin Song Watermarks
-* "Test" is a song you can play through freeplay!
+* New Icons for GF and Daddy Dearest
+* Playback Rate limit increased to 10x
+* "Test" is a song you can play through freeplay
 
 ***
 
 # Installation
 
-1. Download the latest build from Releases.
-2. Extract the Zip.
+1. Download the latest build from Releases
+2. Extract the Zip
 3. Open BEngine.exe
 4. If you want to start modding, enable Developer Mode in the Settings!
 
